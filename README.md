@@ -1,4 +1,4 @@
-# app-cuisine
+# app-football
 
 ## Project setup
 ```
