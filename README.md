@@ -5,22 +5,9 @@ Cette application permet de consulter les matchs, les résultats ou encore le cl
 Pour cela, elle fait appel à l'API suivante : https://www.football-data.org
 
 
-## Project setup
+### Commandes
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
