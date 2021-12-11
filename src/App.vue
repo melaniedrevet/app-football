@@ -9,19 +9,7 @@
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav>
-            <b-nav-item-dropdown class="navbar-item" text="Europe" right>
-              <b-dropdown-item>
-                <router-link class="dropdown-item" to="">Champions League</router-link>
-              </b-dropdown-item>
-              <b-dropdown-item>
-                <router-link class="dropdown-item" to="">Europa League</router-link>
-              </b-dropdown-item>
-              <b-dropdown-item>
-                <router-link class="dropdown-item" to="">Conference League</router-link>
-              </b-dropdown-item>
-            </b-nav-item-dropdown>
-            
+          <b-navbar-nav> 
             <b-nav-item>
               <router-link class="navbar-item" to="/ligue1">Ligue 1</router-link>
             </b-nav-item>
@@ -40,8 +28,6 @@
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
-
-      <!-- <router-link to="/test">Test</router-link> -->
     </div>
     <router-view/>
   </div>
@@ -54,21 +40,54 @@
 }
 
 #menu .navbar-brand {
-  margin-left: 2rem;
-  margin-right: 20rem;
+  margin-left: 1rem;
+  margin-right: 0rem;
   color: rgba(255, 255, 255, 0.75);
+
 }
 
 .navbar-item {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.75);
   font-size: 18px;
-  margin-right: 1.2rem;
+  margin-left: 2rem;
+}
+
+.navbar-item:hover, .navbar-brand:hover {
+  color: white;
 }
 
 .dropdown-item, .navbar-item {
   color: rgba(255, 255, 255, 0.75);
 }
+
+/* Responsive */
+
+/* Tablette */
+@media screen and (min-width: 768px) {
+  #menu .navbar-brand {
+    margin-left: 1rem;
+    margin-right: 10rem;
+  }
+
+  .navbar-item {
+    margin-right: 1.2rem;
+  }
+}
+
+/* Ordinateur */
+@media screen and (min-width: 1024px) {
+  #menu .navbar-brand {
+    margin-left: 2rem;
+    margin-right: 22rem;
+  }
+
+  .navbar-item {
+    margin-left: 0.5rem;
+  }
+  
+}
+
 
 
 

@@ -39,9 +39,10 @@ export default {
 }
 
 .trait {
-  border-right: 2px solid black;
+  border-bottom: 1px solid black;
   padding: 20px;
 }
+
 
 .name {
   font-size: 21px;
@@ -54,5 +55,20 @@ export default {
   font-style: italic;
 }
 
+/* Responsive */
+
+/* Tablette */
+@media screen and (min-width: 768px) {
+  .trait {
+    border-right: 2px solid black;
+    padding: 20px;
+    border-bottom: none;
+  }
+}
+
+/* Ordinateur */
+@media screen and (min-width: 1024px) {
+  
+}
 
 </style>

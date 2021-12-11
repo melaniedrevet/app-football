@@ -2,18 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../components/Home.vue'
 
-import Bundesliga from '../components/Allemagne/Bundesliga.vue'
+import Bundesliga from '../components/Bundesliga.vue'
+import PremierLeague from '../components/PremierLeague.vue'
+import Liga from '../components/Liga.vue'
+import Ligue1 from '../components/Ligue1.vue'
+import SerieA from '../components/SerieA.vue'
 
-
-import PremierLeague from '../components/Angleterre/PremierLeague.vue'
-// import Matchs from '../components/Angleterre/Matchs.vue'
-
-
-import Liga from '../components/Espagne/Liga.vue'
-import Ligue1 from '../components/France/Ligue1.vue'
-import SerieA from '../components/Italie/SerieA.vue'
-
-import Test from '../components/Test.vue'
 
 Vue.use(VueRouter)
 
@@ -38,11 +32,6 @@ const routes = [
     name: 'Premier League',
     component: PremierLeague
   },
-  // {
-  //   path: '/premierleague/matchs',
-  //   name: 'Matchs Premier League',
-  //   component: Matchs
-  // },
   {
     path: '/bundesliga',
     name: 'Bundesliga',
@@ -52,11 +41,6 @@ const routes = [
     path: '/serieA',
     name: 'Serie A',
     component: SerieA
-  },
-  {
-    path: '/test',
-    name: 'Test',
-    component: Test
   }
 ]
 
