@@ -8,15 +8,6 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-// Import Accordion
-import VueSimpleAccordion from 'vue-simple-accordion';
-import 'vue-simple-accordion/dist/vue-simple-accordion.css';
-
-
-Vue.use(VueSimpleAccordion, {
-  // ... Options go here
-});
-
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
