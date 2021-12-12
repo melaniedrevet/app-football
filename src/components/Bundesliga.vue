@@ -137,7 +137,7 @@ export default {
         .catch(error => console.log(error));
 
         // Classement
-        axios.get('https://api.football-data.org/v2/competitions/2002/standings', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
+        axios.get('https://api.football-data.org/v2/competitions/BL1/standings', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
         .then(response => response.data.standings[0].table)
         .then((response) => {
             this.standingBD = response;
@@ -145,7 +145,7 @@ export default {
         .catch(error => console.log(error));
 
         // Equipes
-        axios.get('https://api.football-data.org/v2/competitions/2002/teams', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
+        axios.get('https://api.football-data.org/v2/competitions/BL1/teams', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
         .then(response => response.data.teams)
         .then((response) => {
             this.teamsBD = response;

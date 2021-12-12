@@ -137,7 +137,7 @@ export default {
         .catch(error => console.log(error));
 
         // Classement
-        axios.get('https://api.football-data.org/v2/competitions/2015/standings', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
+        axios.get('https://api.football-data.org/v2/competitions/FL1/standings', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
         .then(response => response.data.standings[0].table)
         .then((response) => {
             this.standingL1 = response;
@@ -145,7 +145,7 @@ export default {
         .catch(error => console.log(error));
 
         // Equipes
-        axios.get('https://api.football-data.org/v2/competitions/2015/teams', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
+        axios.get('https://api.football-data.org/v2/competitions/FL1/teams', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
         .then(response => response.data.teams)
         .then((response) => {
             this.teamsL1 = response;

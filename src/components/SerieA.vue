@@ -137,7 +137,7 @@ export default {
         .catch(error => console.log(error));
 
         // Classement
-        axios.get('https://api.football-data.org/v2/competitions/2019/standings', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
+        axios.get('https://api.football-data.org/v2/competitions/SA/standings', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
         .then(response => response.data.standings[0].table)
         .then((response) => {
             this.standingSA = response;
@@ -145,7 +145,7 @@ export default {
         .catch(error => console.log(error));
 
         // Equipes
-        axios.get('https://api.football-data.org/v2/competitions/2019/teams', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
+        axios.get('https://api.football-data.org/v2/competitions/SA/teams', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
         .then(response => response.data.teams)
         .then((response) => {
             this.teamsSA = response;
