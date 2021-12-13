@@ -134,7 +134,8 @@ export default {
         .then((response) => {
             this.matchsL1 = response;
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false);
 
         // Classement
         axios.get('https://api.football-data.org/v2/competitions/FL1/standings', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
@@ -142,7 +143,8 @@ export default {
         .then((response) => {
             this.standingL1 = response;
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false);
 
         // Equipes
         axios.get('https://api.football-data.org/v2/competitions/FL1/teams', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
@@ -150,7 +152,8 @@ export default {
         .then((response) => {
             this.teamsL1 = response;
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false);
 
         // Buteurs
         axios.get('https://api.football-data.org/v2/competitions/FL1/scorers', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
@@ -159,7 +162,7 @@ export default {
             this.scorersL1 = response;
         })
         .catch(error => console.log(error))
-        .finally(() => this.loading = false);  
+        .finally(() => this.loading = false); 
 
     }
 }

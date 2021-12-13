@@ -134,7 +134,8 @@ export default {
         .then((response) => {
             this.matchsSA = response;
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false);
 
         // Classement
         axios.get('https://api.football-data.org/v2/competitions/SA/standings', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
@@ -142,7 +143,8 @@ export default {
         .then((response) => {
             this.standingSA = response;
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false);
 
         // Equipes
         axios.get('https://api.football-data.org/v2/competitions/SA/teams', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
@@ -150,7 +152,8 @@ export default {
         .then((response) => {
             this.teamsSA = response;
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false);
 
         // Buteurs
         axios.get('https://api.football-data.org/v2/competitions/SA/scorers', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})

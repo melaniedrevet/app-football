@@ -134,7 +134,8 @@ export default {
         .then((response) => {
             this.matchsPL = response;
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false);
 
         // Classement
         axios.get('https://api.football-data.org/v2/competitions/PL/standings', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
@@ -142,7 +143,8 @@ export default {
         .then((response) => {
             this.standingPL = response;
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false);
 
         // Equipes
         axios.get('https://api.football-data.org/v2/competitions/PL/teams', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
@@ -150,7 +152,8 @@ export default {
         .then((response) => {
             this.teamsPL = response;
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .finally(() => this.loading = false);
 
         // Buteurs
         axios.get('https://api.football-data.org/v2/competitions/PL/scorers', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
