@@ -11,19 +11,19 @@
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav> 
             <b-nav-item>
-              <router-link class="navbar-item" to="/ligue1">Ligue 1</router-link>
+              <router-link class="navbar-item" to="/FL1">Ligue 1</router-link>
             </b-nav-item>
             <b-nav-item>
-              <router-link class="navbar-item" to="/liga">Liga</router-link>  
+              <router-link class="navbar-item" to="/PD">Liga</router-link>  
             </b-nav-item>
             <b-nav-item>
-              <router-link class="navbar-item" to="/premierleague">Premier League</router-link> 
+              <router-link class="navbar-item" to="/PL">Premier League</router-link> 
             </b-nav-item>
             <b-nav-item>
-              <router-link class="navbar-item" to="/bundesliga">Bundesliga</router-link>
+              <router-link class="navbar-item" to="/BL1">Bundesliga</router-link>
             </b-nav-item>
             <b-nav-item>
-              <router-link class="navbar-item" to="/serieA">Serie A</router-link>
+              <router-link class="navbar-item" to="/SA">Serie A</router-link>
             </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
@@ -32,6 +32,7 @@
     <router-view/>
   </div>
 </template>
+
 
 <style>
 #app {
@@ -87,8 +88,5 @@
   }
   
 }
-
-
-
 
 </style>

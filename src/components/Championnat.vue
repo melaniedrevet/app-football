@@ -5,7 +5,7 @@
         </div>
         <div class="championnat row" v-else>
             <div class="drapeau col-12 col-md-6 col-lg-2">
-                <img src="../assets/bundesliga.png" alt="championnat">
+                <img :src="require(`../assets/${championnat.code}.png`)" alt="championnat">
             </div>
             <div class="nom col-12 col-md-6 col-lg-7">
                 <h3> {{ championnat.name }} </h3>
@@ -19,22 +19,22 @@
         <div class="menu">
             <div class="accordion-body">
                 <div class="accordion">
-                    <div class="container2">
-                        <div class="label">Upcoming matches</div>
+                    <div class="container2" @click="accordionToggle">
+                        <div class="label" >Upcoming matches</div>
                         <div class="content row">
-                            <Matchs class="col-12 col-md-6 col-lg-3 mb-3" v-for="(matchs, i) in matchsBD" :key="'S' + i" :match="matchs"/>
+                          <Matchs class="col-12 col-md-6 col-lg-3 mb-3" v-for="(matchs, i) in matchs" :key="'S' + i" :match="matchs"/>
                         </div>
                     </div>
                     <hr>
-                    <div class="container2">
-                        <div class="label">Results</div>
+                    <div class="container2" @click="accordionToggle">
+                        <div class="label" >Results</div>
                         <div class="content row">
-                            <Resultats class="col-12 col-md-6 col-lg-3 mb-3" v-for="(matchs, i) in matchsBD" :key="'R' + i" :match="matchs"/>
+                            <Resultats class="col-12 col-md-6 col-lg-3 mb-3" v-for="(matchs, i) in matchs" :key="'R' + i" :match="matchs"/>
                         </div>
                     </div>
                     <hr>
-                    <div class="container2">
-                        <div class="label">Standing</div>
+                    <div class="container2" @click="accordionToggle">
+                        <div class="label" >Standing</div>
                         <div class="content">
                             <table class="classement">
                                 <thead>
@@ -52,23 +52,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <Classement v-for="(standing, i) in standingBD" :key="'C' + i" :place="standing"/> 
+                                  <Classement v-for="(standing, i) in standing" :key="'C' + i" :place="standing"/> 
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <hr>
-                    <div class="container2">
-                        <div class="label">Teams</div>
+                    <div class="container2" @click="accordionToggle">
+                        <div class="label" >Teams</div>
                         <div class="content row">
-                            <Equipes class="col-12 col-md-3 p-2" v-for="(teams, i) in teamsBD" :key="'E' + i" :team="teams"/>
+                          <Equipes class="col-12 col-md-3 p-2" v-for="(teams, i) in teams" :key="'E' + i" :team="teams"/>
                         </div>
                     </div>
                     <hr>
-                    <div class="container2">
-                        <div class="label">Scorers</div>
+                    <div class="container2" @click="accordionToggle">
+                        <div class="label" >Scorers</div>
                         <div class="content row">
-                            <Buteurs class="col-12 col-lg-6 p-2" v-for="(scorers, i) in scorersBD" :key="'G' + i" :scorer="scorers"/>
+                          <Buteurs class="col-12 col-lg-6 p-2" v-for="(scorers, i) in scorers" :key="'G' + i" :scorer="scorers"/>
                         </div>
                     </div>
                 </div>
@@ -77,17 +77,18 @@
     </div>
 </template>
 
-<script>
-import axios from 'axios';
-import Matchs from './Parts/Matchs.vue'
-import Resultats from './Parts/Resultats.vue'
-import Classement from './Parts/Classement.vue'
-import Equipes from './Parts/Equipes.vue'
-import Buteurs from './Parts/Buteurs.vue'
 
+<script>
+// import axios from 'axios';
+import dataService from '../service/dataService.js';
+import Matchs from './Parts/Matchs.vue';
+import Resultats from './Parts/Resultats.vue';
+import Classement from './Parts/Classement.vue';
+import Equipes from './Parts/Equipes.vue';
+import Buteurs from './Parts/Buteurs.vue';
 
 export default {
-    name: 'Bundesliga',
+    name: 'Championnat',
     components: {
         Matchs,
         Resultats,
@@ -95,77 +96,98 @@ export default {
         Equipes,
         Buteurs
     },
-
+    
     data() {
         return {
             loading: true,
+            isActive: false,
+            name: this.$route.params.code,
+            search: null,
 
             championnat : null,
-            matchsBD : null,
-            teamsBD: null,
-            scorersBD: null,
-            standingBD: null,
+            matchs : null,
+            teams: null,
+            scorers: null,
+            standing: null,
         }
     },
 
-    mounted() {
+    methods: {
+        accordionToggle(event) {
+            event.target.parentElement.classList.toggle('active');
+        },
 
-        // Accordeon
-        const accordion = document.getElementsByClassName('container2');
-
-        for (let i=0; i<accordion.length; i++) {
-            accordion[i].addEventListener('click', function () {
-                this.classList.toggle('active')
+        getCompetitions(competition) {
+            dataService.getCompetitions(competition)
+            .then(response => response.data)
+            .then((response) => {
+                this.championnat = response;
             })
+            .catch(error => console.log(error))
+            .finally(() => this.loading = false);
+        },
+
+        getMatches(competition) {
+            dataService.getMatches(competition)
+            .then(response => response.data.matches)
+            .then((response) => {
+                this.matchs = response;
+            })
+            .catch(error => console.log(error))
+            .finally(() => this.loading = false);
+        },
+
+        getStanding(competition) {
+            dataService.getStanding(competition)
+            .then(response => response.data.standings[0].table)
+            .then((response) => {
+                this.standing = response;
+            })
+            .catch(error => console.log(error))
+            .finally(() => this.loading = false);
+        },
+
+        getTeams(competition) {
+            dataService.getTeams(competition)
+            .then(response => response.data.teams)
+            .then((response) => {
+                this.teams = response;
+            })
+            .catch(error => console.log(error))
+            .finally(() => this.loading = false);
+        },
+
+        getScorers(competition) {
+            dataService.getScorers(competition)
+            .then(response => response.data.scorers)
+            .then((response) => {
+                this.scorers = response;
+            })
+            .catch(error => console.log(error))
+            .finally(() => this.loading = false); 
+        },
+
+        render(name) {
+            this.getCompetitions(name);
+            this.getMatches(name);
+            this.getStanding(name);
+            this.getTeams(name);
+            this.getScorers(name);
         }
+    },
 
-        // Championnat
-        axios.get('https://api.football-data.org/v2/competitions/BL1', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
-        .then(response => response.data)
-        .then((response) => {
-            this.championnat = response;
-        })
-        .catch(error => console.log(error))
-        .finally(() => this.loading = false);
+    watch: {
+        $route() {
+            this.render(this.$route.params.code);
+        }
+    },
 
-        // Matchs 
-        axios.get('https://api.football-data.org/v2/competitions/BL1/matches', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
-        .then(response => response.data.matches)
-        .then((response) => {
-            this.matchsBD = response;
-        })
-        .catch(error => console.log(error))
-        .finally(() => this.loading = false);
-
-        // Classement
-        axios.get('https://api.football-data.org/v2/competitions/BL1/standings', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
-        .then(response => response.data.standings[0].table)
-        .then((response) => {
-            this.standingBD = response;
-        })
-        .catch(error => console.log(error))
-        .finally(() => this.loading = false);
-
-        // Equipes
-        axios.get('https://api.football-data.org/v2/competitions/BL1/teams', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
-        .then(response => response.data.teams)
-        .then((response) => {
-            this.teamsBD = response;
-        })
-        .catch(error => console.log(error))
-        .finally(() => this.loading = false);
-
-        // Buteurs
-        axios.get('https://api.football-data.org/v2/competitions/BL1/scorers', {headers: { "X-Auth-Token": "d6bb4175db1246bf90df60886d70fedb"}})
-        .then(response => response.data.scorers)
-        .then((response) => {
-            this.scorersBD = response;
-        })
-        .catch(error => console.log(error))
-        .finally(() => this.loading = false);  
+    mounted() {        
+       this.render(this.name);
     }
 }
 </script>
+
 
 <style scoped>
 
@@ -186,7 +208,7 @@ export default {
 }
 
 .drapeau img {
-    width: 120px;
+    width: 100px;
 }
 
 .nom {
@@ -229,7 +251,6 @@ export default {
         padding: 0;
     }
 }
-
 
 /* Classement */
 
@@ -309,6 +330,7 @@ export default {
   content: '-';
   font-size: 25px;
 }
+
 
 
 </style>
