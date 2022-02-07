@@ -79,7 +79,6 @@
 
 
 <script>
-// import axios from 'axios';
 import dataService from '../service/dataService.js';
 import Matchs from './Parts/Matchs.vue';
 import Resultats from './Parts/Resultats.vue';
@@ -102,7 +101,6 @@ export default {
             loading: true,
             isActive: false,
             name: this.$route.params.code,
-            search: null,
 
             championnat : null,
             matchs : null,
